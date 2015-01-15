@@ -1,0 +1,573 @@
+{
+
+    "order": 0,
+
+    "template": "viewpoint_*",
+
+    "settings": {
+
+        "index.number_of_replicas": "1",
+
+        "index.number_of_shards": "5"
+
+    },
+
+    "mappings": {
+
+        "indicator_alert": {
+
+            "_source": {
+
+                "compress": true
+
+            },
+
+            "_timestamp": {
+
+                "enabled": true,
+
+                "path": "date",
+
+                "format": "basic_date_time"
+
+            },
+
+            "properties": {
+
+                "message": {
+
+                    "type": "string"
+
+                },
+
+                "occurence": {
+
+                    "type": "long"
+
+                },
+
+                "weight": {
+
+                    "type": "double"
+
+                },
+
+                "type": {
+
+                    "type": "string"
+
+                },
+
+                "currentValue": {
+
+                    "type": "double"
+
+                },
+
+                "previousValue": {
+
+                    "type": "double"
+
+                },
+
+                "date": {
+
+                    "format": "basic_date_time",
+
+                    "type": "date"
+
+                },
+
+                "projectName": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "key": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "projectKey": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "threshold": {
+
+                    "type": "double"
+
+                }
+
+            },
+
+            "_all": {
+
+                "enabled": false
+
+            }
+
+        },
+
+        "indicator_event": {
+
+            "_source": {
+
+                "compress": true
+
+            },
+
+            "_timestamp": {
+
+                "enabled": true,
+
+                "path": "timestamp",
+
+                "format": "basic_date_time"
+
+            },
+
+            "_ttl": {
+
+                "enabled": true,
+
+                "default": "7d"
+
+            },
+
+            "properties": {
+
+                "detail": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "errorType": {
+
+                    "type": "string"
+
+                },
+
+                "userAgent": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "status": {
+
+                    "type": "string"
+
+                },
+
+                "requestId": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "isOk": {
+
+                    "type": "boolean"
+
+                },
+
+                "complexValue": {
+
+                    "properties": {
+
+                        "load_time": {
+
+                            "type": "double"
+
+                        },
+
+                        "server": {
+
+                            "index": "not_analyzed",
+
+                            "type": "string"
+
+                        }
+
+                    }
+
+                },
+
+                "type": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "date": {
+
+                    "format": "basic_date_time",
+
+                    "type": "date"
+
+                },
+
+                "uri": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "msg": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "endpoint": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "ip": {
+
+                    "type": "string"
+
+                },
+
+                "timestamp": {
+
+                    "type": "date"
+
+                },
+
+                "project": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "input": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "start": {
+
+                    "type": "double"
+
+                },
+
+                "sessionId": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "userId": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "name": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "value": {
+
+                    "type": "double"
+
+                },
+
+                "method": {
+
+                    "type": "string"
+
+                },
+
+                "referer": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "output": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "methodName": {
+
+                    "type": "string"
+
+                },
+
+                "trackerId": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                }
+
+            },
+
+            "_all": {
+
+                "enabled": false
+
+            }
+
+        },
+
+        "indicator_data": {
+
+            "_source": {
+
+                "compress": true
+
+            },
+
+            "_timestamp": {
+
+                "enabled": true,
+
+                "path": "date",
+
+                "format": "basic_date_time"
+
+            },
+
+            "properties": {
+
+                "min": {
+
+                    "type": "double"
+
+                },
+
+                "detail": {
+
+                    "dynamic": "true",
+
+                    "properties": {
+
+                        "id": {
+
+                            "index": "not_analyzed",
+
+                            "type": "string"
+
+                        },
+
+                        "count": {
+
+                            "type": "long"
+
+                        },
+
+                        "ok": {
+
+                            "type": "boolean"
+
+                        },
+
+                        "key": {
+
+                            "index": "not_analyzed",
+
+                            "type": "string"
+
+                        }
+
+                    },
+
+                    "type": "nested"
+
+                },
+
+                "max": {
+
+                    "type": "double"
+
+                },
+
+                "count": {
+
+                    "type": "long"
+
+                },
+
+                "errorCount": {
+
+                    "type": "long"
+
+                },
+
+                "stdDeviation": {
+
+                    "type": "double"
+
+                },
+
+                "date": {
+
+                    "format": "basic_date_time",
+
+                    "type": "date"
+
+                },
+
+                "type": {
+
+                    "type": "string"
+
+                },
+
+                "externalId": {
+
+                    "type": "long"
+
+                },
+
+                "projectKey": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "value": {
+
+                    "type": "double"
+
+                },
+
+                "projectName": {
+
+                    "index": "not_analyzed",
+
+                    "type": "string"
+
+                },
+
+                "average": {
+
+                    "type": "double"
+
+                }
+
+            },
+
+            "_all": {
+
+                "enabled": false
+
+            }
+
+        },
+
+        "indicator_global_data": {
+
+            "_source": {
+
+                "compress": true
+
+            },
+
+            "_timestamp": {
+
+                "enabled": true,
+
+                "path": "date",
+
+                "format": "basic_date_time"
+
+            },
+
+            "properties": {
+
+                "count": {
+
+                    "type": "long"
+
+                },
+
+                "errorFuncCount": {
+
+                    "type": "long"
+
+                },
+
+                "errorCount": {
+
+                    "type": "long"
+
+                },
+
+                "type": {
+
+                    "type": "string"
+
+                },
+
+                "date": {
+
+                    "format": "basic_date_time",
+
+                    "type": "date"
+
+                }
+
+            },
+
+            "_all": {
+
+                "enabled": false
+
+            }
+        }
+      }
+    }
+}

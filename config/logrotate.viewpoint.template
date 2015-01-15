@@ -1,0 +1,33 @@
+/log/bddpmon/viewpoint/elasticsearch/*.log {
+        daily
+        missingok
+        rotate 10
+        compress
+        delaycompress
+        notifempty
+        create 640 bddpmon bddpmon
+}
+
+/log/bddpmon/viewpoint/mysql/*.log {
+        daily
+        missingok
+        rotate 10
+        compress
+        delaycompress
+        notifempty
+        create 640 bddpmon bddpmon
+}
+
+/log/bddpmon/viewpoint/nginx/*.log {
+        daily
+        missingok
+        rotate 10 
+        compress
+        delaycompress
+        notifempty
+        create 640 nginx adm
+        sharedscripts
+        postrotate
+                [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
+        endscript
+}

@@ -1,0 +1,50 @@
+server {
+    listen       80;
+    server_name  localhost;
+    error_log    /log/bddpmon/viewpoint/nginx/error.log warn;
+    access_log   /log/bddpmon/viewpoint/nginx/access.log  main;
+
+    location /viewpoint {
+        alias   /soft/home/bddpmon/viewpoint/app/www;
+        index  index.html index.htm;
+    }
+
+    location /viewpoint/server {
+        proxy_pass         http://localhost:8282/Viewpoint;
+        proxy_set_header   Host         $host;
+        proxy_set_header   X-Real-IP    $remote_addr;
+    }
+
+    location /viewpoint/server1 {
+        proxy_pass         http://localhost:8282/Viewpoint;
+        proxy_set_header   Host         $host;
+        proxy_set_header   X-Real-IP    $remote_addr;
+    }
+
+    location /admin/es/ {
+        proxy_pass         http://localhost:9200/;
+        proxy_set_header   Host         $host;
+        proxy_set_header   X-Real-IP    $remote_addr;
+    }
+
+    location /admin/kibana/ {
+        proxy_pass         http://localhost:9200/_plugin/kibana/;
+        proxy_set_header   Host         $host;
+        proxy_set_header   X-Real-IP    $remote_addr;
+    }
+
+    location /admin/head/ {
+        proxy_pass         http://localhost:9200/_plugin/head/;
+        proxy_set_header   Host         $host;
+        proxy_set_header   X-Real-IP    $remote_addr;
+    }
+
+    location /admin/rabbit/  {
+        proxy_pass         http://localhost:15672/;
+        proxy_set_header   Host         $host;
+        proxy_set_header   X-Real-IP    $remote_addr;
+	rewrite                 ^/rabbit/(.*)$ /$1 break;
+    }
+
+}
+

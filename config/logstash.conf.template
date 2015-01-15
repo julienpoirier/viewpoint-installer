@@ -1,0 +1,50 @@
+input {
+  file {
+    type => "indicator_event"
+    path => "/data/bddpmon/viewpoint/syslog-ng/viewpoint.log"
+  }
+}
+
+filter {
+  grok {
+    match => [ "message", "%{SYSLOGTIMESTAMP:timestamp} %{IPORHOST:device} %{GREEDYDATA:indicatorSrc}" ]
+    remove_field => ["message", "device", "indicator", "host", "path", "timestamp"]
+  }
+
+  json {
+    source => "indicatorSrc"
+  }
+
+  mutate {
+    remove_field => ["indicatorSrc"]
+  }
+
+  ruby {
+    code => "event = event['indicator']"
+  }
+
+  mutate {
+    remove_field => ["indicator"]
+  }
+}
+
+output {
+  stdout { codec => rubydebug }
+  viewpoint {
+    protocol => "transport"
+    embedded => false
+    host => "127.0.0.1"
+    cluster => "viewpoint"
+    node_name => "logstash"
+    index_type => "indicator_event"
+    index => "viewpoint_events_r0_%{+YYYY-MM-dd}"
+    manage_template => false
+  }
+
+  rabbitmq {
+    exchange => "VIEWPOINT_TERAPI"
+    exchange_type => "topic"
+    host => "127.0.0.1"
+    key => "terapi"
+  }
+}
