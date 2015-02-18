@@ -5,7 +5,7 @@ server {
     access_log   /log/bddpmon/viewpoint/nginx/access.log  main;
 
     location /viewpoint {
-        alias   /soft/home/bddpmon/viewpoint/app/www;
+        alias   /data/bddpmon/viewpoint/viewpoint/app/www;
         index  index.html index.htm;
     }
 

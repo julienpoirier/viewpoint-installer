@@ -1,4 +1,4 @@
-###############################
+##############################
 # Default settings for logstash
 ###############################
 
@@ -35,4 +35,5 @@ LS_LOG_FILE=/log/bddpmon/viewpoint/logstash/logstash.log
 
 # Nice level
 #LS_NICE=0
+
 
