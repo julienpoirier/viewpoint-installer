@@ -342,12 +342,16 @@
 
                 },
 
-                "trackerId": {
+                "requestId": {
 
                     "index": "not_analyzed",
 
                     "type": "string"
 
+                }, 
+                "method": {
+					"index": "not_analyzed",
+                    "type": "string"
                 }
 
             },

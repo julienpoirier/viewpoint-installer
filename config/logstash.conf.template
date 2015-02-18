@@ -29,7 +29,6 @@ filter {
 }
 
 output {
-  stdout { codec => rubydebug }
   viewpoint {
     protocol => "transport"
     embedded => false

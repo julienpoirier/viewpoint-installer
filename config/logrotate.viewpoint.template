@@ -31,3 +31,23 @@
                 [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
         endscript
 }
+
+/log/bddpmon/viewpoint/logstash/*.log {
+        daily
+        rotate 10
+        copytruncate
+        compress
+        missingok
+        notifempty
+}
+
+/data/bddpmon/viewpoint/syslog-ng/*.log {
+        daily
+        rotate 10
+        copytruncate
+        compress
+        missingok
+        notifempty
+}
+
+

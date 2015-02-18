@@ -7,10 +7,6 @@ logDir=/log/bddpmon/viewpoint/
 installDir=/soft/home/bddpmon/viewpoint/
 confDir=${installDir}config/
 
-cd ${dataDir}/elasticsearch/plugins && tar -zxvf ${installDir}/install/plugins.tar.gz ; cd -
-chown -R elasticsearch:bddpmon ${dataDir}/elasticsearch/plugins/
-exit;
-
 service logstash stop
 service syslog-ng stop
 service elasticsearch stop
@@ -40,6 +36,12 @@ sudo yum install ${rpmDir}MySQL-client-5.6.22-1.el6.x86_64.rpm
 
 # Global dir 
 chmod 755 /soft/home/bddpmon/
+mkdir ${installDir}/bin
+chown bddpmon:bddpmon ${installDir}/bin
+
+mkdir -p ${installDir}/app/www
+chown -R bddpmon:bddpmon ${installDir}/app
+
 
 #############
 # NGinx
@@ -68,6 +70,7 @@ chown -R elasticsearch:bddpmon ${dataDir}/elasticsearch/plugins/
 cp -pr ${confDir}/elasticsearch.yml.template /etc/elasticsearch/elasticsearch.yml
 
 service elasticsearch start
+sleep 5
 curl -XPUT localhost:9200/_template/template_viewpoint -d @${installDir}/install/mapping.es.json
 service elasticsearch stop
 
@@ -75,10 +78,12 @@ service elasticsearch stop
 # Glassfish #
 #############
 
+mkdir -p ${logDir}/glassfish
 cd ${installDir}/bin/ && unzip ../thirdparties/glassfish-3.1.2.2.zip ; cd -
 chown -R bddpmon:bddpmon ${installDir}/bin/glassfish3
 cp -pr ${confDir}/gf.domain.xml ${installDir}/bin/glassfish3/glassfish/domains/domain1/config/domain.xml
 cp -pr ${confDir}/gf.viewpoint.properties ${installDir}/bin/glassfish3/glassfish/domains/domain1/config/viewpoint.properties
+cp -pr ${confDir}/gf.log4j.properties ${installDir}/bin/glassfish3/glassfish/domains/domain1/config/log4j.properties
 
 service glassfish start
 ${installDir}/bin/glassfish3/glassfish/bin/asadmin --passwordfile ${installDir}/install/glassfishChangePassword --user admin change-admin-password
