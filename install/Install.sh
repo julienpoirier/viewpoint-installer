@@ -7,7 +7,6 @@ confDir=${installDir}config/
 dataDir=/data/bddpmon/viewpoint/
 logDir=/log/bddpmon/viewpoint/
 
-
 service logstash stop
 service syslog-ng stop
 service elasticsearch stop
@@ -121,6 +120,8 @@ service mysql stop
 ############
 # RabbitMQ #
 ############
+#mv /var/lib/rabbitmq ${dataDir}
+#ln -nsf ${dataDir}/rabbitmq /var/lib/rabbitmq
 service rabbitmq-server start
 rabbitmq-plugins enable rabbitmq_management
 

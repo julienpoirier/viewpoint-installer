@@ -348,7 +348,7 @@
 
                     "type": "string"
 
-                }, 
+                },
                 "method": {
 					"index": "not_analyzed",
                     "type": "string"
@@ -447,6 +447,10 @@
                     "type": "long"
 
                 },
+
+              "errorFuncCount": {
+                "type": "long"
+              },
 
                 "stdDeviation": {
 
@@ -549,6 +553,7 @@
                     "type": "long"
 
                 },
+
 
                 "type": {
 
